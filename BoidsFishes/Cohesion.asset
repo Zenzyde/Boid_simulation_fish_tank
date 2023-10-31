@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88eed15f22d4b4742a04fa90fb51b82c, type: 3}
+  m_Name: Cohesion
+  m_EditorClassIdentifier: 
+  behavior: 0
+  behaviourWeight: 5
+  behaviourRadius: 8
+  behaviourGridRadius: 0
+  behaviourFOVRadius: -0.3

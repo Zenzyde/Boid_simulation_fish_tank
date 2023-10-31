@@ -12,29 +12,56 @@ public class BoidSeparate : BoidBehaviourBase
 
 	public override Vector3 GetMovement()
 	{
-		List<BoidsController> neighbours = controller.GetGridManager().GetObjectsWithinRangeOfGridUnit(controller.transform.position, settings.behaviourRadius);
-		if (neighbours == null || neighbours.Count <= 1)
+		if (neighbours == null || neighbours.Length == 0)
 		{
-			return Vector3.zero;
+			return controller.transform.forward;
 		}
 
 		Vector3 movement = Vector3.zero;
 		bool addedToMovement = false;
-		foreach (BoidsController boid in neighbours)
+
+		foreach (Collider collider in neighbours)
 		{
-			if (boid == controller || Vector3.Distance(boid.transform.position, controller.transform.position) > settings.behaviourRadius)
-				continue;
-			movement -= (boid.transform.position - controller.transform.position).normalized;
-			addedToMovement = true;
+			if (collider.transform.parent.TryGetComponent(out BoidsController boid))
+			{
+				if (Vector3.Dot(controller.transform.forward, (boid.transform.position - controller.transform.position).normalized) <= settings.behaviourFOVRadius)
+					continue;
+				movement -= (boid.transform.position - controller.transform.position);
+				addedToMovement = true;
+			}
 		}
 
 		if (!addedToMovement)
 		{
-			return Vector3.zero;
+			return controller.transform.forward;
 		}
 
-		movement /= neighbours.Count;
+		movement /= neighbours.Length;
 		movement *= settings.behaviourWeight;
 		return movement;
+	}
+
+	public override void SetNeighbourPayload(Collider[] neighbours)
+	{
+		List<Collider> acceptedNeighbours = new List<Collider>();
+		for (int i = neighbours.Length - 1; i >= 0; i--)
+		{
+			if (neighbours[i].transform == null)
+				continue;
+			if (neighbours[i].gameObject.layer == LayerMask.NameToLayer("Boid"))
+			{
+				if (Vector3.Distance(neighbours[i].transform.position, controller.transform.position) <= settings.behaviourRadius)
+				{
+					acceptedNeighbours.Add(neighbours[i]);
+				}
+			}
+		}
+		this.neighbours = acceptedNeighbours.ToArray();
+	}
+
+	public override void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(controller.transform.position, settings.behaviourRadius);
 	}
 }

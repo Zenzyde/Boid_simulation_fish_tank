@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 
-public class BoidAvoidTank : BoidBehaviourBase
+public class BoidAvoidObstacle : BoidBehaviourBase
 {
-	public BoidAvoidTank(BoidsController controller, BoidBehaviourSettings settings)
+	public BoidAvoidObstacle(BoidsController controller, BoidBehaviourSettings settings)
 	{
 		this.controller = controller;
 		this.settings = settings;
@@ -31,7 +30,7 @@ public class BoidAvoidTank : BoidBehaviourBase
 
 		if (!addedToMovement)
 		{
-			return controller.transform.forward;
+			return movement;
 		}
 
 		movement /= neighbours.Length;
@@ -47,7 +46,7 @@ public class BoidAvoidTank : BoidBehaviourBase
 		{
 			if (neighbours[i].transform == null)
 				continue;
-			if (neighbours[i].gameObject.layer == LayerMask.NameToLayer("Wall"))
+			if (neighbours[i].gameObject.layer == LayerMask.NameToLayer("Obstacle"))
 			{
 				Vector3 closest = neighbours[i].ClosestPoint(controller.transform.position);
 				Vector3 boidToClosest = (closest - controller.transform.position).normalized;

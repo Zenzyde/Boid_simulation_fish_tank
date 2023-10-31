@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class BoidWander : BoidBehaviourBase
 {
+	Vector3 wanderPoint;
+
 	public BoidWander(BoidsController controller, BoidBehaviourSettings settings)
 	{
 		this.controller = controller;
 		this.settings = settings;
+		timeToTarget = 1.3f;
 	}
 
 	public override Vector3 GetMovement()
@@ -16,23 +19,24 @@ public class BoidWander : BoidBehaviourBase
 
 		if (controller.GetManager().IsOutsideTank(controller))
 		{
-			return movement;
+			elapsedTargetTime = timeToTarget * 2;
+			return controller.transform.forward;
 		}
 
-		Vector3 wanderPoint = controller.transform.position + UnityEngine.Random.insideUnitSphere * settings.behaviourWeight;
-		Vector3 wanderDirection = (wanderPoint - controller.transform.position).normalized;
-
-		int assignAttempts = 5;
-		while (Vector3.Dot(controller.transform.forward, wanderDirection) < 0 && assignAttempts > 0)
+		if (elapsedTargetTime > 0)
+			elapsedTargetTime -= Time.deltaTime;
+		else if (elapsedTargetTime <= 0)
 		{
-			wanderPoint = controller.transform.position + UnityEngine.Random.insideUnitSphere * settings.behaviourWeight;
-			wanderDirection = (wanderPoint - controller.transform.position).normalized;
-
-			assignAttempts--;
+			wanderPoint = controller.transform.position + controller.transform.forward * settings.behaviourRadius + Random.onUnitSphere * (settings.behaviourRadius / 2.0f);
+			elapsedTargetTime = timeToTarget;
 		}
+
+		Vector3 wanderDirection = (wanderPoint - controller.transform.position).normalized;
 
 		movement = wanderDirection * settings.behaviourWeight;
 
 		return movement;
 	}
+
+	public override void OnDrawGizmos() { }
 }
