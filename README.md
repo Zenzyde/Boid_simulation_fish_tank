@@ -14,7 +14,7 @@ The simulation itself is autonomous, but boids can be added and removed dynamica
 
 The following screenshot and gif shows the "fishes" in action
 ![Boids](/images/boids_active_simulation_example.png)
-![Boids gif](/images/Boids_active_simulations.gif)
+![Boids gif](/images/Boids_active_simulation.gif)
 
 The following screenshot shows an example of a scriptable object which controls the setting for the individual steering behaviours.
 ![Gridmanager](/images/boid_scriptable_object_align.png)
