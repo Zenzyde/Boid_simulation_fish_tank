@@ -12,11 +12,12 @@ The steering behaviours implemented in the simulation can be described as follow
 
 The simulation itself is autonomous, but boids can be added and removed dynamically
 
-The following screenshot shows the "fishes" in action
-![Boids](/images/active_simulation_example.png)
+The following screenshot and gif shows the "fishes" in action
+![Boids](/images/boids_active_simulation_example.png)
+![Boids gif](/images/Boids_active_simulations.gif)
 
 The following screenshot shows an example of a scriptable object which controls the setting for the individual steering behaviours.
-![Gridmanager](/images/boids_scriptable_object_align.png)
+![Gridmanager](/images/boid_scriptable_object_align.png)
 
 The following screenshot shows the main script controlling the simulation
 ![Boidmanager](/images/boids_manager_script.png)
