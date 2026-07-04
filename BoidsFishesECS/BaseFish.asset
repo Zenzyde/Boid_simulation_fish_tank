@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4383db8a52093247b68c4447b92177d, type: 3}
+  m_Name: BaseFish
+  m_EditorClassIdentifier: Assembly-CSharp::BoidEntityTypeSO
+  behaviors:
+  - {fileID: 11400000, guid: 299978e06cf7f0d4ca155fb6c103133a, type: 2}
+  - {fileID: 11400000, guid: 520acab132d33364f92d6999b2d3fc2e, type: 2}
+  - {fileID: 11400000, guid: cec822d0a03361146b42898b9f38f0c6, type: 2}
+  - {fileID: 11400000, guid: fcde74921bc3f5d40b9dfad82c06c956, type: 2}
+  - {fileID: 11400000, guid: 1e923ef8162a9a14b8813132b70094c4, type: 2}
+  minSpeed: 4
+  maxSpeed: 12
+  prefab: {fileID: 1719637513495382600, guid: abb83b1b5ffc88249bf1dc9d19c21820, type: 3}
+  speciesName: Marlin
